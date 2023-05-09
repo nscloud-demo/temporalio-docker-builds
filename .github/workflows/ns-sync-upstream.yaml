@@ -56,7 +56,7 @@ jobs:
         run: |
           # Skip Login to DockerHub and do not push images.
           sed -e '/Login to DockerHub/,+5d' .github/workflows/docker.yml | sed "s/push=.*event_name.*/push=false/g" > .github/workflows/docker-tmp.yml
-          mv .github/workflows/docker-images-tmp.yml .github/workflows/docker-images.yml
+          mv .github/workflows/docker-tmp.yml .github/workflows/docker.yml
 
           # Update them to run on nscloud.
           sed -e 's/^\([[:space:]]*\)runs-on: .*/\1runs-on: nscloud/' -i .github/workflows/*.y*ml
