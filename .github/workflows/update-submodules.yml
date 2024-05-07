@@ -16,7 +16,7 @@ on:
 jobs:
   sync:
     name: "Update submodules"
-    runs-on: ubuntu-latest
+    runs-on: nscloud
 
     defaults:
       run:

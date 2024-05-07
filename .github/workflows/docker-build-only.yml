@@ -41,7 +41,7 @@ on:
 jobs:
   build-image:
     # TODO: use bigger runner when available. Seems like they're stuck or not enough?
-    runs-on: ubuntu-latest
+    runs-on: nscloud
     services:
       registry:
         image: registry:2

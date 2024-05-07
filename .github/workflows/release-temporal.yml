@@ -25,7 +25,7 @@ on:
 jobs:
   retag-and-release:
     name: "Re-tag and release images"
-    runs-on: ubuntu-latest
+    runs-on: nscloud
 
     steps:
       - uses: actions/checkout@v3

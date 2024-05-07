@@ -32,7 +32,7 @@ on:
 
 jobs:
   build-push-images:
-    runs-on: ubuntu-latest-16-cores
+    runs-on: nscloud
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2

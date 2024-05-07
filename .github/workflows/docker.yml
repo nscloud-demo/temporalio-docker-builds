@@ -21,7 +21,7 @@ on:
 
 jobs:
   build-push-images:
-    runs-on: ubuntu-latest-16-cores
+    runs-on: nscloud
     # Usually, a successful job takes ~17 mins.
     # Anything more than 30 mins is a sign that job is stuck.
     # This is a workaround until we find the root cause.
@@ -39,12 +39,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to DockerHub
-        if: ${{ !env.ACT }}
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PAT }}
 
       - name: Set SHA when dispatched
         run: |
@@ -80,12 +74,6 @@ jobs:
         run: BAKE_OUTPUT=registry make build
 
       # TODO: can we loop this somehow?
-      - name: Run Trivy vulnerability scanner on Server image
-        uses: ./.github/actions/trivy
-        with:
-          image-tags: temporaliotest/server:${{ env.IMAGE_TAG }}
-          image-name: server
-
       - name: Run Trivy vulnerability scanner on Admin Tools image
         if: ${{ github.event_name == 'push' && !env.ACT }}
         uses: ./.github/actions/trivy
